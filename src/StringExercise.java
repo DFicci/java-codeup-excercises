@@ -1,5 +1,3 @@
-package main;
-
 public class StringExercise {
     public static void main(String[] args){
         String pinkFloydQuote = "we don't need no education\nWe dont need no thought control";
