@@ -15,41 +15,39 @@ public class Input {
     }
 
     public boolean yesNo(String prompt) {
-        System.out.printf("%s", prompt + "\n");
+        System.out.printf("%s", prompt);
         String response = input.nextLine();
-        if (response.equalsIgnoreCase("yes") || response.equalsIgnoreCase("y")) {
+        if(response.equalsIgnoreCase("yes") || response.equalsIgnoreCase("y")) {
             return true;
         }
         return false;
     }
 
-    public int getInt(String prompt) {
-        while (true) {
-            System.out.printf("%s", prompt);
-            if (input.hasNextInt()) {
-                int result = input.nextInt();
-                input.nextLine();
-                return result;
-            }
-            input.nextInt();
-        }
-    }
-
     public int getInt(String prompt, int min, int max) {
-        while (true) {
+        while(true) {
             int result = getInt(prompt);
-            if (result >= min && result <= max) {
+            if(result >= min && result <= max) {
                 return result;
             }
             System.out.printf("Integer must be between %d and %d!\n", min, max);
         }
     }
 
-    public double getDouble(String prompt) {
-        while (true) {
+    public double getDouble(String prompt, double min, double max) {
+        while(true) {
+            double result = getDouble(prompt);
+            if(result >= min && result <= max) {
+                return result;
+            }
+            System.out.printf("Double must be between %f and %f!\n", min, max);
+        }
+    }
+
+    public int getInt(String prompt) {
+        while(true) {
             System.out.printf("%s", prompt);
-            if (input.hasNextDouble()) {
-                double result = input.nextDouble();
+            if(input.hasNextInt()) {
+                int result = input.nextInt();
                 input.nextLine();
                 return result;
             }
@@ -57,13 +55,14 @@ public class Input {
         }
     }
 
-    public double getDouble(String prompt, double min, double max) {
-        while (true) {
-            double result = getDouble(prompt);
-            if (result >= min && result <= max) {
-                return result;
+    public double getDouble(String prompt) {
+        while(true) {
+            try {
+                String aString = getString(prompt);
+                return Double.valueOf(aString);
+            } catch(NumberFormatException e) {
+                System.out.println("Input something that can be turned into a double.");
             }
-            System.out.printf("Double must be between %f and %f!\n", min, max);
         }
     }
 
